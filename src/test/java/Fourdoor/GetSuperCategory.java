@@ -47,6 +47,7 @@ public class GetSuperCategory {
         System.out.println("Heading H1 :-" + h1);
         System.out.println("Title is :-" + title);
         System.out.println("Description is :-" + desc);
+
       }
 
     }
@@ -103,6 +104,13 @@ public class GetSuperCategory {
         JSONObject packageResponse = packageData.getJSONObject(j);
         String name = packageResponse.getString("name");
         System.out.println("Package name is :-" + name);
+        JSONObject packageMetaData = packageResponse.getJSONObject("metadata");
+        String h1 = packageMetaData.getString("h1");
+        System.out.println("Heading h1 for package :-"+h1);
+        String title = packageMetaData.getString("title");
+        String desc = packageMetaData.getString("description");
+        System.out.println("Package title is :- "+title);
+        System.out.println("Package description is :- "+desc);
 
       }
     }
