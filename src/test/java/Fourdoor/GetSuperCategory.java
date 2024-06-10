@@ -19,7 +19,16 @@ public class GetSuperCategory {
 
   @Test
   public void checkResponseCode() {
+
+    long startTime = System.currentTimeMillis();
+
     Response response = RestAssured.given().headers("FD_CITY_CODE", "gurugram").get();
+
+    long endTime = System.currentTimeMillis();
+    long responseTime = endTime-startTime;
+
+    System.out.println("The response time for checkResponseCode is "+ responseTime + "ms");
+
 
     int statusCode = response.getStatusCode();
 
@@ -28,10 +37,18 @@ public class GetSuperCategory {
 
   @Test
   public void getSuperCategoryDetails() {
+
+    long startTime = System.currentTimeMillis();
     Response response = RestAssured.given().headers("FD_CITY_CODE", "gurugram").get();
+    long endTime = System.currentTimeMillis();
+    long responseTime = endTime-startTime;
+    System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + "ms");
+
+    Assert.assertEquals(response.getStatusCode(),200,"Correct Status code");
+
+
 
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
-
     JSONArray superCategoryData = jsonObject.getJSONArray("data");
     for (int i = 0; i < superCategoryData.length(); i++) {
       JSONObject superCategoryResponse = superCategoryData.getJSONObject(i);
@@ -72,7 +89,13 @@ public class GetSuperCategory {
   @Test(dataProvider = "slugs")
   public void getCategoryBasedOnSuper(String slug) {
 
+    long startTime = System.currentTimeMillis();
     Response response = RestAssured.given().pathParam("slug", slug).headers("FD_CITY_CODE", "gurugram").get("{slug}");
+    long endTime = System.currentTimeMillis();
+    long responseTime = endTime-startTime;
+    System.out.println("The response time for getCategoryBasedOnSuper is "+ responseTime + "ms");
+
+
 
     Assert.assertEquals(response.getStatusCode(), 200);
 
@@ -91,7 +114,12 @@ public class GetSuperCategory {
   @Test(dataProvider = "slugs")
   public void getPackageBasedOnCategory(String slug)
   {
+    long startTime = System.currentTimeMillis();
     Response response = RestAssured.given().pathParam("slug",slug).headers("FD_CITY_CODE","gurugram").get("{slug}");
+    long endTime = System.currentTimeMillis();
+    long responseTime = endTime-startTime;
+    System.out.println("The response time for getPackageBasedOnCategory is "+ responseTime + "ms");
+
 
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
     JSONArray categoryData = jsonObject.getJSONArray("data");
