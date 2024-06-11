@@ -2,6 +2,7 @@ package Fourdoor;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import jsonUtils.jsonUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -12,6 +13,7 @@ import utils.RestUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,8 +24,8 @@ public class GetSuperCategory {
 
     long startTime = System.currentTimeMillis();
 
-    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
-    String endPoint = data.get("GetSuperCategory");
+    Map<String,Object> data = jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = (String) data.get("GetSuperCategory");
     Map<String,String> headers = new HashMap<>();
     headers.put("FD_CITY_CODE","gurugram");
     Response response = RestUtils.performGet(endPoint,headers);
@@ -43,8 +45,8 @@ public class GetSuperCategory {
   public void getSuperCategoryDetails() throws IOException {
 
     long startTime = System.currentTimeMillis();
-    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
-    String endPoint = data.get("GetSuperCategory");
+    Map<String, Object> data = jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = (String) data.get("GetSuperCategory");
     Map<String,String> headers = new HashMap<>();
     headers.put("FD_CITY_CODE","gurugram");
     Response response = RestUtils.performGet(endPoint,headers);
@@ -77,7 +79,7 @@ public class GetSuperCategory {
 
   }
 
-  @DataProvider(name = "slugs")
+ /* @DataProvider(name = "slugs")
   public Object[][] createSlugs() {
     return new Object[][]{
             {"car-service-and-maintenance"},
@@ -89,14 +91,26 @@ public class GetSuperCategory {
             {"car-detailing"},
             {"car-wash-and-spa"}
     };
+  }*/
+
+  @DataProvider(name = "slugs")
+  public Object[][] createSlugs() throws IOException {
+    List<String> slugs = jsonUtils.getSlugs("/Fourdoor/QA/CategoryName.json");
+    Object[][] data = new Object[slugs.size()][1];
+    for (int i= 0 ;i < slugs.size(); i++)
+    {
+      data[i][0] = slugs.get(i);
+    }
+    return data;
+
   }
 
   @Test(dataProvider = "slugs")
   public void getCategoryBasedOnSuper(String slug) throws IOException {
 
     long startTime = System.currentTimeMillis();
-    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
-    String endPoint = data.get("GetSuperCategory");
+    Map<String,Object> data = jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = (String) data.get("GetSuperCategory");
     Map<String,String> headers = new HashMap<>();
     headers.put("FD_CITY_CODE","gurugram");
 
@@ -128,8 +142,8 @@ public class GetSuperCategory {
   @Test(dataProvider = "slugs")
   public void getPackageBasedOnCategory(String slug) throws IOException {
     long startTime = System.currentTimeMillis();
-    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
-    String endPoint = data.get("GetSuperCategory");
+    Map<String, Object> data = jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = (String) data.get("GetSuperCategory");
     Map<String,String> headers = new HashMap<>();
     headers.put("FD_CITY_CODE","gurugram");
 

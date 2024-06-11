@@ -1,0 +1,13 @@
+{
+  "slugs" :
+          [
+            "car-service-and-maintenance",
+            "car-ac-service",
+            "general-car-inspection",
+            "bodyshop-dent-and-paint",
+            "steering-and-suspension",
+            "engine-and-brakes",
+            "car-detailing",
+            "car-wash-and-spa"
+          ]
+}
