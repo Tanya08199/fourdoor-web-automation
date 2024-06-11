@@ -41,4 +41,14 @@ public class RestUtils {
        return response;
 
     }
+
+    public static Response performGetWithParams(String endPoint, Map<String, String> headers, Map<String,String> pathParams)
+    {
+        RequestSpecification requestSpecification = getRequestSpecification(endPoint,headers).pathParams(pathParams);
+        Response response = requestSpecification.get("{param1}");
+        printRequestLogInReport(requestSpecification);
+        printResponseLogInReport(response);
+        return response;
+
+    }
 }

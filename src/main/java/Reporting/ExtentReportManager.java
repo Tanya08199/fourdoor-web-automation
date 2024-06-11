@@ -48,6 +48,6 @@ public class ExtentReportManager {
 
     public static void logInfoDetails(String log)
     {
-        Setup.extentTest.get().info(MarkupHelper.createLabel(log,ExtentColor.ORANGE));
+        Setup.extentTest.get().info(MarkupHelper.createLabel(log,ExtentColor.BLUE));
     }
 }

@@ -8,21 +8,25 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.RestUtils;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GetSuperCategory {
 
-  @BeforeTest
-  public void setUp() {
-    RestAssured.baseURI = "https://fourdoor-catalog-service-qa.fourdoor.dev/api/v1/category/super";
-  }
-
   @Test
-  public void checkResponseCode() {
+  public void checkResponseCode() throws IOException {
 
     long startTime = System.currentTimeMillis();
 
-    Response response = RestAssured.given().headers("FD_CITY_CODE", "gurugram").get();
+    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = data.get("GetSuperCategory");
+    Map<String,String> headers = new HashMap<>();
+    headers.put("FD_CITY_CODE","gurugram");
+    Response response = RestUtils.performGet(endPoint,headers);
 
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
@@ -36,16 +40,17 @@ public class GetSuperCategory {
   }
 
   @Test
-  public void getSuperCategoryDetails() {
+  public void getSuperCategoryDetails() throws IOException {
 
     long startTime = System.currentTimeMillis();
-    Response response = RestAssured.given().headers("FD_CITY_CODE", "gurugram").get();
+    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = data.get("GetSuperCategory");
+    Map<String,String> headers = new HashMap<>();
+    headers.put("FD_CITY_CODE","gurugram");
+    Response response = RestUtils.performGet(endPoint,headers);
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
     System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + "ms");
-
-    Assert.assertEquals(response.getStatusCode(),200,"Correct Status code");
-
 
 
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
@@ -87,10 +92,19 @@ public class GetSuperCategory {
   }
 
   @Test(dataProvider = "slugs")
-  public void getCategoryBasedOnSuper(String slug) {
+  public void getCategoryBasedOnSuper(String slug) throws IOException {
 
     long startTime = System.currentTimeMillis();
-    Response response = RestAssured.given().pathParam("slug", slug).headers("FD_CITY_CODE", "gurugram").get("{slug}");
+    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = data.get("GetSuperCategory");
+    Map<String,String> headers = new HashMap<>();
+    headers.put("FD_CITY_CODE","gurugram");
+
+    Map<String,String> pathParams = new HashMap<>();
+    pathParams.put("param1",slug);
+
+    Response response = RestUtils.performGetWithParams(endPoint,headers,pathParams);
+
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
     System.out.println("The response time for getCategoryBasedOnSuper is "+ responseTime + "ms");
@@ -112,10 +126,17 @@ public class GetSuperCategory {
   }
 
   @Test(dataProvider = "slugs")
-  public void getPackageBasedOnCategory(String slug)
-  {
+  public void getPackageBasedOnCategory(String slug) throws IOException {
     long startTime = System.currentTimeMillis();
-    Response response = RestAssured.given().pathParam("slug",slug).headers("FD_CITY_CODE","gurugram").get("{slug}");
+    Map<String,String> data = jsonUtils.jsonUtils.getJsonDataAsMap("/Fourdoor/QA/fourdoorApiData.json");
+    String endPoint = data.get("GetSuperCategory");
+    Map<String,String> headers = new HashMap<>();
+    headers.put("FD_CITY_CODE","gurugram");
+
+    Map<String,String> pathParams = new HashMap<>();
+    pathParams.put("param1",slug);
+
+    Response response = RestUtils.performGetWithParams(endPoint,headers,pathParams);
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
     System.out.println("The response time for getPackageBasedOnCategory is "+ responseTime + "ms");

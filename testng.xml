@@ -6,7 +6,7 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="Fourdoor.GetSuperCategoryApi"/>
+            <class name="Fourdoor.GetSuperCategory"/>
         </classes>
     </test>
 </suite>
