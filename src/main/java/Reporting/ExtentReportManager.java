@@ -23,15 +23,17 @@ public class ExtentReportManager {
 
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
-
         return extentReports;
     }
 
     public static String getReportNameWithTime()
     {
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
         LocalDateTime localDateTime = LocalDateTime.now();
         String formattedTime = dateTimeFormatter.format(localDateTime);
+
+
         return "TestReport" + formattedTime+ ".html";
     }
 
@@ -42,5 +44,10 @@ public class ExtentReportManager {
     public static void logFailDetails(String log)
     {
         Setup.extentTest.get().fail(MarkupHelper.createLabel(log, ExtentColor.RED));
+    }
+
+    public static void logInfoDetails(String log)
+    {
+        Setup.extentTest.get().info(MarkupHelper.createLabel(log,ExtentColor.ORANGE));
     }
 }

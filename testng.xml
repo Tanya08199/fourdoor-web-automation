@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="APITestSuite">
-    <test name="APITest">
-        <listeners>
-            <listener class-name="Reporting.Setup"/>
-        </listeners>
+
+    <listeners>
+        <listener class-name="Reporting.Setup"/>
+    </listeners>
+    <test name="Test">
         <classes>
-            <class name="Fourdoor.GetSuperCategory"/>
+            <class name="Fourdoor.GetSuperCategoryApi"/>
         </classes>
     </test>
 </suite>
