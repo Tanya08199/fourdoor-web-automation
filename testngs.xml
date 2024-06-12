@@ -4,7 +4,7 @@
 <suite name="Suite">
     <test name="Test">
         <classes>
-            <class name="FourdoorSelenium.HomePage"/>
+            <class name="FourdoorSelenium.CanonicalTagsTestCase"/>
         </classes>
     </test>
 </suite>

@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.POJO.*;
 import utils.RestUtils;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class GetSuperCategory {
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
 
-    System.out.println("The response time for checkResponseCode is "+ responseTime + "ms");
+    System.out.println("The response time for checkResponseCode is "+ responseTime + " ms");
 
 
     int statusCode = response.getStatusCode();
@@ -58,12 +59,33 @@ public class GetSuperCategory {
     Response response = RestUtils.performGet(endPoint,headers);
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
-    System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + "ms");
+    System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + " ms");
 
+    GetSuperCategoryResponse getSuperCategoryResponse = response.as(GetSuperCategoryResponse.class);
+    for(SuperCategory superCategory : getSuperCategoryResponse.getData())
+    {
+      String categoryCode = superCategory.getCategoryCode();
+      System.out.println("The super category code is "+categoryCode);
+      String categoryName = superCategory.getName();
+      System.out.println("The super category name is "+categoryName);
 
+      MetaData metadata = superCategory.getMetadata();
+      if(metadata != null)
+      {
+        String h1 = metadata.getH1();
+        System.out.println("The h1 is "+h1);
+        String title = metadata.getTitle();
+        System.out.println("The title is "+title);
+        String desc = metadata.getDescription();
+        System.out.println("The description is "+desc);
+      }
+    }
+
+/*
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
     JSONArray superCategoryData = jsonObject.getJSONArray("data");
-    for (int i = 0; i < superCategoryData.length(); i++) {
+
+   for (int i = 0; i < superCategoryData.length(); i++) {
       JSONObject superCategoryResponse = superCategoryData.getJSONObject(i);
       int id = superCategoryResponse.getInt("id");
       String superCategoryName = superCategoryResponse.getString("name");
@@ -82,9 +104,8 @@ public class GetSuperCategory {
 
     }
 
-
+ */
   }
-
 
   @DataProvider(name = "slugs")
   public Object[][] createSlugs() throws IOException {
@@ -109,11 +130,20 @@ public class GetSuperCategory {
 
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
-    System.out.println("The response time for getCategoryBasedOnSuper is "+ responseTime + "ms");
-
-
-
+    System.out.println("The response time for getCategoryBasedOnSuper is "+ responseTime + " ms");
     Assert.assertEquals(response.getStatusCode(), 200);
+
+    GetSuperCategoryResponse getSuperCategoryResponse = response.as(GetSuperCategoryResponse.class);
+    for(SuperCategory superCategory : getSuperCategoryResponse.getData())
+    {
+      String categoryCode = superCategory.getCategoryCode();
+      System.out.println("The category code is "+categoryCode);
+
+      String categoryName = superCategory.getName();
+      System.out.println("The category name is "+categoryName);
+    }
+
+    /*
 
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
     JSONArray categoryData = jsonObject.getJSONArray("data");
@@ -124,8 +154,10 @@ public class GetSuperCategory {
       System.out.println("Category name is :-"+ name);
 
     }
+    */
 
   }
+
 
   @Test(dataProvider = "slugs")
   public void getPackageBasedOnCategory(String slug) throws IOException {
@@ -137,9 +169,25 @@ public class GetSuperCategory {
     Response response = RestUtils.performGetWithParams(endPoint,headers,pathParams);
     long endTime = System.currentTimeMillis();
     long responseTime = endTime-startTime;
-    System.out.println("The response time for getPackageBasedOnCategory is "+ responseTime + "ms");
+    System.out.println("The response time for getPackageBasedOnCategory is "+ responseTime + " ms");
+
+    GetCategoryResponse getCategoryResponse = response.as(GetCategoryResponse.class);
+    for(Category category : getCategoryResponse.getData())
+    {
+      String name = category.getName();
+      System.out.println("The category name is "+name);
+      for(Packages packages : category.getPackages())
+      {
+        String packagesName = packages.getName();
+        System.out.println("The package name is "+packagesName);
+      }
 
 
+    }
+
+
+
+/*
     JSONObject jsonObject = new JSONObject(response.getBody().asString());
     JSONArray categoryData = jsonObject.getJSONArray("data");
     for(int i =0; i< categoryData.length(); i++)
@@ -160,6 +208,8 @@ public class GetSuperCategory {
         System.out.println("Package description is :- "+desc);
 
       }
-    }
+    }*/
   }
+
+
 }
