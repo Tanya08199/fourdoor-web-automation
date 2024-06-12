@@ -7,6 +7,8 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class Setup implements ITestListener {
 
@@ -42,6 +44,15 @@ public class Setup implements ITestListener {
 
         ExtentTest test = extentReports.createTest("Test name "+ result.getMethod().getMethodName());
         extentTest.set(test);
+    }
+
+    public void onTestFailure(ITestResult result)
+    {
+        ExtentReportManager.logFailDetails(result.getThrowable().getMessage());
+
+        String printTrace = Arrays.toString(result.getThrowable().getStackTrace());
+        printTrace = printTrace.replaceAll(",", "<br>");
+        ExtentReportManager.logFailDetails(printTrace);
     }
 
 
