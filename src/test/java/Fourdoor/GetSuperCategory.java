@@ -66,6 +66,7 @@ public class GetSuperCategory {
     {
       String categoryCode = superCategory.getCategoryCode();
       System.out.println("The super category code is "+categoryCode);
+
       String categoryName = superCategory.getName();
       System.out.println("The super category name is "+categoryName);
 
