@@ -1,45 +1,30 @@
 package utils;
 
+
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.annotations.Test;
+
+import java.io.IOException;
+
 
 public class ExcelUtils {
 
-    public static void main(String[] args) {
-        readExcel();
+    public static XSSFSheet readExcel(String excelPath, String sheetName) throws IOException {
+
+        XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
+        return workbook.getSheet(sheetName);
+
     }
 
-    public static void readExcel()
-    {
-        try {
-            String excelPath = "data/FourDoorMigrationContentV1 .xlsx";
 
-            XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
-            XSSFSheet sheet = workbook.getSheet("Super_Category");
-             //int rowCount = sheet.getPhysicalNumberOfRows();
-            int rowCount = sheet.getPhysicalNumberOfRows();
-            System.out.println(rowCount);
-             int colCount = sheet.getRow(0).getPhysicalNumberOfCells();
+public static String getCellValue(XSSFSheet sheet, int rowIndex, int colIndex)
+{
+    DataFormatter formatter = new DataFormatter();
+    return formatter.formatCellValue(sheet.getRow(rowIndex).getCell(colIndex));
+}
 
 
-            DataFormatter formatter = new DataFormatter();
-
-             for (int i =1; i<=rowCount; i++)
-             {
-                 for(int j = 0; j< colCount; j++)
-                 {
-                     Object value = formatter.formatCellValue(sheet.getRow(i).getCell(0));
-                     System.out.println(value);
-
-                 }
-             }
 
 
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

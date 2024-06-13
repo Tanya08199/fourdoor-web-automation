@@ -3,6 +3,9 @@ package Fourdoor;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import jsonUtils.jsonUtils;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -10,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.ExcelUtils;
 import utils.POJO.*;
 import utils.RestUtils;
 
@@ -62,24 +66,43 @@ public class GetSuperCategory {
     System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + " ms");
 
     GetSuperCategoryResponse getSuperCategoryResponse = response.as(GetSuperCategoryResponse.class);
-    for(SuperCategory superCategory : getSuperCategoryResponse.getData())
-    {
-      String categoryCode = superCategory.getCategoryCode();
-      System.out.println("The super category code is "+categoryCode);
 
-      String categoryName = superCategory.getName();
-      System.out.println("The super category name is "+categoryName);
+   XSSFSheet sheet = ExcelUtils.readExcel("data/TestExcel (1).xlsx","Sheet1");
 
-      MetaData metadata = superCategory.getMetadata();
-      if(metadata != null)
-      {
-        String h1 = metadata.getH1();
-        System.out.println("The h1 is "+h1);
-        String title = metadata.getTitle();
-        System.out.println("The title is "+title);
-        String desc = metadata.getDescription();
-        System.out.println("The description is "+desc);
-      }
+   for(int i =1 ; i<= sheet.getLastRowNum(); i++)
+   {
+
+     String expectedCategoryCode = ExcelUtils.getCellValue(sheet,i,0);
+     String expectedCategoryName = ExcelUtils.getCellValue(sheet,i,2);
+     String expectedSlug = ExcelUtils.getCellValue(sheet,i,1);
+     String expectedCityCode = ExcelUtils.getCellValue(sheet,i,5);
+     String expectedSearchRanking = ExcelUtils.getCellValue(sheet,i,6);
+     SuperCategory superCategory = getSuperCategoryResponse.getData().get(i-1);
+
+       Assert.assertEquals(expectedCategoryCode, superCategory.getCategoryCode(), "Category code mismatch");
+       Assert.assertEquals(expectedCategoryName, superCategory.getName(), "Category name mismatch");
+       Assert.assertEquals(expectedSlug, superCategory.getSlug(), "Slug mis match");
+       Assert.assertEquals(expectedCityCode,superCategory.getCityCode(), "City code is mismatch");
+       Assert.assertEquals(expectedSearchRanking,superCategory.getSearchRanking(), "Search rank is mismatch");
+
+
+       MetaData metadata = superCategory.getMetadata();
+       if (metadata != null) {
+         String h1 = metadata.getH1();
+         String title = metadata.getTitle();
+         String desc = metadata.getDescription();
+         Icon icon = metadata.getIcon();
+         HeroImage heroImage = metadata.getHeroImage();
+
+         if (icon != null) {
+           String pathIcon = icon.getPath();
+         }
+         if (heroImage != null) {
+           String pathHero = heroImage.getPath();
+         }
+       }
+     }
+
     }
 
 /*
@@ -106,8 +129,9 @@ public class GetSuperCategory {
     }
 
  */
-  }
 
+
+  /*
   @DataProvider(name = "slugs")
   public Object[][] createSlugs() throws IOException {
     List<String> slugs = jsonUtils.getSlugs("/Fourdoor/QA/CategoryName.json");
@@ -155,7 +179,7 @@ public class GetSuperCategory {
       System.out.println("Category name is :-"+ name);
 
     }
-    */
+
 
   }
 
@@ -209,8 +233,9 @@ public class GetSuperCategory {
         System.out.println("Package description is :- "+desc);
 
       }
-    }*/
-  }
+    }
+
+  }*/
 
 
 }
