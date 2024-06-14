@@ -11,5 +11,8 @@ public class Category {
 
     private String categoryCode;
     private  String name;
+    private  String searchRanking;
+    private String slug;
+    private MetaData metadata;
     private List<Packages> packages;
 }

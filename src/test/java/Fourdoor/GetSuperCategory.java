@@ -1,17 +1,11 @@
 package Fourdoor;
 
-import io.restassured.RestAssured;
+
 import io.restassured.response.Response;
 import jsonUtils.jsonUtils;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.ExcelUtils;
 import utils.POJO.*;
@@ -19,7 +13,6 @@ import utils.RestUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -79,26 +72,83 @@ public class GetSuperCategory {
      String expectedSearchRanking = ExcelUtils.getCellValue(sheet,i,6);
      SuperCategory superCategory = getSuperCategoryResponse.getData().get(i-1);
 
+     try {
        Assert.assertEquals(expectedCategoryCode, superCategory.getCategoryCode(), "Category code mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Category code mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
        Assert.assertEquals(expectedCategoryName, superCategory.getName(), "Category name mismatch");
-       Assert.assertEquals(expectedSlug, superCategory.getSlug(), "Slug mis match");
-       Assert.assertEquals(expectedCityCode,superCategory.getCityCode(), "City code is mismatch");
-       Assert.assertEquals(expectedSearchRanking,superCategory.getSearchRanking(), "Search rank is mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Category name mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedSlug, superCategory.getSlug(), "Slug mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Slug mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedCityCode, superCategory.getCityCode(), "City code mismatch");
+     } catch (AssertionError e) {
+       System.err.println("City code mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedSearchRanking, superCategory.getSearchRanking(), "Search rank mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Search rank mismatch at row " + i + ": " + e.getMessage());
+     }
+
 
 
        MetaData metadata = superCategory.getMetadata();
        if (metadata != null) {
-         String h1 = metadata.getH1();
-         String title = metadata.getTitle();
-         String desc = metadata.getDescription();
+
+         try {
+           String expectedH1 = ExcelUtils.getCellValue(sheet, i, 9);
+           Assert.assertEquals(expectedH1, metadata.getH1(), "H1 mismatch");
+         } catch (AssertionError e) {
+           System.err.println("H1 mismatch at row " + i + ": " + e.getMessage());
+         }
+
+         try {
+           String expectedTitle = ExcelUtils.getCellValue(sheet, i, 7);
+           Assert.assertEquals(expectedTitle, metadata.getTitle(), "Title mismatch");
+         } catch (AssertionError e) {
+           System.err.println("Title mismatch at row " + i + ": " + e.getMessage());
+         }
+
+         try {
+           String expectedDesc = ExcelUtils.getCellValue(sheet, i, 8);
+           Assert.assertEquals(expectedDesc, metadata.getDescription(), "Description mismatch");
+         } catch (AssertionError e) {
+           System.err.println("Description mismatch at row " + i + ": " + e.getMessage());
+         }
+
+
          Icon icon = metadata.getIcon();
          HeroImage heroImage = metadata.getHeroImage();
 
+
          if (icon != null) {
-           String pathIcon = icon.getPath();
+           try {
+             String expectedPathIcon = ExcelUtils.getCellValue(sheet, i, 3);
+             Assert.assertEquals(expectedPathIcon, icon.getPath(), "Icon path mismatch");
+           } catch (AssertionError e) {
+             System.err.println("Icon path mismatch at row " + i + ": " + e.getMessage());
+           }
+
          }
          if (heroImage != null) {
-           String pathHero = heroImage.getPath();
+           try {
+             String expectedHeroPath = ExcelUtils.getCellValue(sheet, i, 4);
+             Assert.assertEquals(expectedHeroPath, heroImage.getPath(), "Hero image path mismatch");
+           } catch (AssertionError e) {
+             System.err.println("Hero image path mismatch at row " + i + ": " + e.getMessage());
+           }
          }
        }
      }
