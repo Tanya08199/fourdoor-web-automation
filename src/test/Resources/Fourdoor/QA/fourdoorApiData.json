@@ -1,4 +1,5 @@
 {
   "GetSuperCategory" : "https://fourdoor-catalog-service-qa.fourdoor.dev/api/v1/category/super",
-  "GetCategory" : "https://fourdoor-catalog-service-qa.fourdoor.dev/api/v1/category"
+  "GetCategory" : "https://fourdoor-catalog-service-qa.fourdoor.dev/api/v1/category",
+  "StaticContent" : "https://fourdoor-catalog-service-qa.fourdoor.dev/public/api/v1/content"
 }
