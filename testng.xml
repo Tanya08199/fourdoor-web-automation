@@ -6,7 +6,7 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="Fourdoor.GetStaticContent"/>
+            <class name="Fourdoor.GetPackage"/>
         </classes>
 
     </test>

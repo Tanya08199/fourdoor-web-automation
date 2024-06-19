@@ -70,6 +70,7 @@ public class GetSuperCategory {
      String expectedSlug = ExcelUtils.getCellValue(sheet,i,1);
      String expectedCityCode = ExcelUtils.getCellValue(sheet,i,5);
      String expectedSearchRanking = ExcelUtils.getCellValue(sheet,i,6);
+
      SuperCategory superCategory = getSuperCategoryResponse.getData().get(i-1);
 
      try {
