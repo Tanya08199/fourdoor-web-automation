@@ -8,13 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.WebDriverManger.WebDriverSetup;
 
 import java.time.Duration;
 import java.util.List;
 
 import static utils.WebDriverManger.WebDriverUtils.*;
 
-public class LoginPage extends BaseTest {
+public class LoginPage {
+
+    private WebDriver driver = WebDriverSetup.getDriver();
 
 
     @Test

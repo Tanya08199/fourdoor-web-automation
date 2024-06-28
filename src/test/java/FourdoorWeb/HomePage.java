@@ -1,13 +1,16 @@
 package FourdoorWeb;
 
+import io.cucumber.java.en.When;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.*;
+import utils.WebDriverManger.WebDriverSetup;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -16,11 +19,21 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import static utils.ImageValidation.isValidUrl;
-import static utils.ImageValidation.openInBrowser;
 
-public class HomePage extends BaseTest {
 
-    @Test
+public class HomePage{
+
+    private WebDriver driver = WebDriverSetup.getDriver();
+
+    @When("User is at the fourdoor home page")
+    public void verifyHomePage()
+    {
+        String expectedTitle = "Expert Car Service & Repair in Gurugram | Fourdoor";
+        String actualTitle = driver.getTitle();
+        Assert.assertEquals(actualTitle,expectedTitle,"Title mismatch");
+    }
+
+    @When("User is at Super Category section")
     public void superCategory() throws IOException {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -50,7 +63,7 @@ public class HomePage extends BaseTest {
         }
     }
 
-    @Test
+    @When("User is at Assurance Banner section")
     public void assuranceBanner()
     {
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
@@ -71,7 +84,7 @@ public class HomePage extends BaseTest {
         }
     }
 
-    @Test
+    @When("User is at Home Page Services section")
     public void homPageServices()
     {
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
@@ -99,7 +112,7 @@ public class HomePage extends BaseTest {
         }
     }
 
-    @Test
+    @When("User is at Price Comparison section")
     public void priceComparison()
     {
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
@@ -116,7 +129,7 @@ public class HomePage extends BaseTest {
 
     }
 
-    @Test
+    @When("User is at Our Workshop section")
     public void ourWorkshop()
     {
         WebElement ourWorkshopDiv = driver.findElement(By.xpath("//div[contains(@class,\"bg-bg-gray-300\")]//div[contains(@class,\"max-w-screen-xl mx-auto px-4\")]"));
@@ -134,7 +147,7 @@ public class HomePage extends BaseTest {
 
     }
 
-    @Test
+    @When("User is at Testimonial section")
     public void testimonial() throws IOException {
         WebElement testimonial = driver.findElement(By.xpath("//div[contains(@class,\"pl-4 lg:px-4 w-full pt-4 pb-2 lg:py-10\")]"));
         WebElement h2 = testimonial.findElement(By.tagName("h2"));
@@ -170,7 +183,7 @@ public class HomePage extends BaseTest {
 
     }
 
-    @Test
+    @When("User is at Why choose fourdoor section")
     public void whyChooseFourdoor() throws IOException {
         WebElement h2 = driver.findElement(By.xpath("//div[contains(@class,\"px-4 py-4 lg:py-10 w-full\")]//h2[text()='Why choose Fourdoor for car service?']"));
         System.out.println(h2.getText());
