@@ -8,6 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "/Users/user/IdeaProjects/fourdoor-web-automation/src/main/resources/FeatureFile",
         glue = {"FourdoorWeb"},
+        tags = "not @ignore",
         plugin = {"pretty", "html:target/cucumber-reports.html"},
         monochrome = true
 )

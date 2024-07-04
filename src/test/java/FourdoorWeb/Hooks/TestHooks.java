@@ -10,7 +10,7 @@ public class TestHooks {
     public void setUp()
     {
         WebDriverSetup.getDriver().manage().window().maximize();
-        WebDriverSetup.getDriver().get("https://fourdoor-web-stage.fourdoor.dev/");
+        WebDriverSetup.getDriver().get("https://fourdoor-web-qa.fourdoor.dev/");
     }
 
     @After

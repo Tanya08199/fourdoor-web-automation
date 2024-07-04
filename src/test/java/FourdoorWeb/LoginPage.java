@@ -1,5 +1,7 @@
 package FourdoorWeb;
 
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +22,7 @@ public class LoginPage {
     private WebDriver driver = WebDriverSetup.getDriver();
 
 
-    @Test
+    @When("User run the login functionality")
     public void Login() throws InterruptedException {
         // Get the viewport width using JavaScript
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -70,7 +72,7 @@ public class LoginPage {
 
     }
 
-    @Test
+    @Then("Verify the user is logged in or not")
     public void verifyLogin()
     {
         JavascriptExecutor js = (JavascriptExecutor) driver;

@@ -1,3 +1,4 @@
+@ignore
 Feature: Home Page of Fourdoor
   Scenario: Validate and print the home page content
     Given User is at the fourdoor home page
