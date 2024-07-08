@@ -2,9 +2,9 @@
 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-    <test name="Test">
+    <test name="Test2">
         <classes>
-            <class name="FourdoorSelenium.CanonicalTagsTestCase"/>
+            <class name="FourdoorSelenium.dateAndTimeOnCheckOut"/>
         </classes>
     </test>
 </suite>

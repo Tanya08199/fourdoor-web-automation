@@ -21,7 +21,8 @@ public class CanonicalTagsTestCase extends BaseTest{
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/steering-and-suspension"},
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/engine-and-brakes"},
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source=Home%20page"},
-                {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source="}
+                {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source="},
+                {"https://fourdoor-web-qa.fourdoor.dev/help-and-faq?source=Home%20page"}
         };
     }
 
