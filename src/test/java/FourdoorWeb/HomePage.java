@@ -36,7 +36,6 @@ public class HomePage{
     @When("User is at Super Category section")
     public void superCategory() throws IOException {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement superCategoryDiv = driver.findElement(By.xpath("//div[contains(@class,\"lg:shadow-landingCard\")]"));
 
         XSSFSheet sheet = ExcelUtils.readExcel("data/TestExcel (3).xlsx","Sheet1");

@@ -22,8 +22,8 @@ public class LoginPage {
     private WebDriver driver = WebDriverSetup.getDriver();
 
 
-    @When("User run the login functionality")
-    public void Login() throws InterruptedException {
+    @When("^User run the login functionality with (.*)$")
+    public void Login(String number) throws InterruptedException {
         // Get the viewport width using JavaScript
         JavascriptExecutor js = (JavascriptExecutor) driver;
         long viewportWidth = (Long) js.executeScript("return window.innerWidth;");
@@ -45,7 +45,7 @@ public class LoginPage {
        WebElement numberBox = loginBox.findElement(By.xpath("//div[contains(@class,\"flex rounded-lg relative\")]//input"));
        waitForClickable(driver,numberBox);
        click(driver,numberBox);
-       numberBox.sendKeys("8510932973");
+       numberBox.sendKeys(number);
 
        WebElement otpButton = loginBox.findElement(By.xpath("//button[contains(text(),'Get OTP')]"));
        waitToEnable(driver,otpButton);
@@ -67,7 +67,10 @@ public class LoginPage {
         WebElement verifyButton = loginBox.findElement(By.xpath("//button[contains(text(),'Verify')]"));
         waitToEnable(driver,verifyButton);
         click(driver,verifyButton);
-        Thread.sleep(3000);
+
+        WebElement loader = driver.findElement(By.xpath("//div[contains(@class,\"min-h-80 min-w-80 rounded-3xl overflow-hidden lg:h-full flex justify-center items-center bg-white\")]"));
+        waitForInvisible(driver,loader);
+        Thread.sleep(5000);
 
 
     }

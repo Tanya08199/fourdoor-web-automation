@@ -139,6 +139,37 @@ public class HeaderToBeFixed {
 
     }
 
+    @Then("User add particular package to cart")
+    public void addToCartSpecificPackage() throws InterruptedException {
+
+        WebElement superCategoryDiv = driver.findElement(By.xpath("//div[contains(@class,\"lg:shadow-landingCard\")]"));
+        List<WebElement> superCategoryName = superCategoryDiv.findElements(By.tagName("a"));
+        for (WebElement superCat : superCategoryName)
+        {
+            if(superCat.getText().equals("Denting & Painting"))
+            {
+                click(driver,superCat);
+
+            }
+        }
+
+        Thread.sleep(3000);
+
+        WebElement listingDiv = driver.findElement(By.xpath("//div[contains(@class,\"divide-y divide-custom-gray-border flex flex-col\")]"));
+        List<WebElement> servicesDiv = listingDiv.findElements(By.xpath("//div[@id='front-side-paint']//div[contains(@class,\"shadow-landingCard p-4 rounded-2xl\")]//button"));
+
+        for(WebElement services : servicesDiv)
+        {
+            click(driver,services);
+            Thread.sleep(4000);
+        }
+
+        Thread.sleep(3000);
+
+
+    }
+
+
     @Then("Verify cart header is fixed")
     public void checkCartHeader() throws InterruptedException {
         WebElement cartIcon = driver.findElement(By.xpath("//div[contains(@class,\"header_headerWrap__zI_4G lg:relative z-20\")]//span[contains(@class,\"cursor-pointer relative hidden lg:block lg:hover:bg-bg-gray-300 rounded-xl\")]"));

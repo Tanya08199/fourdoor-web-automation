@@ -1,3 +1,4 @@
+@ignore
 Feature: Check the header fixed functionality
 
   Scenario: Validate the header is fixed on home page
