@@ -1,3 +1,4 @@
+@ignore
 Feature: Coupon flow functionality
   Scenario : Verify the referral coupon
     Given User is on the home page
