@@ -60,7 +60,16 @@ public class GetSuperCategory {
 
     GetSuperCategoryResponse getSuperCategoryResponse = response.as(GetSuperCategoryResponse.class);
 
-   XSSFSheet sheet = ExcelUtils.readExcel("data/TestExcel (1).xlsx","Sheet1");
+    //Create a map to store super category data based on unique identifiers
+    Map<String,SuperCategory> superCategoryMap = new HashMap<>();
+    for(SuperCategory superCategory : getSuperCategoryResponse.getData())
+    {
+      superCategoryMap.put(superCategory.getCategoryCode(),superCategory);
+    }
+
+    XSSFSheet sheet = ExcelUtils.readExcel("data/TestExcel (1).xlsx","Sheet1");
+
+
 
    for(int i =1 ; i<= sheet.getLastRowNum(); i++)
    {
@@ -71,7 +80,7 @@ public class GetSuperCategory {
      String expectedCityCode = ExcelUtils.getCellValue(sheet,i,5);
      String expectedSearchRanking = ExcelUtils.getCellValue(sheet,i,6);
 
-     SuperCategory superCategory = getSuperCategoryResponse.getData().get(i-1);
+     SuperCategory superCategory = superCategoryMap.get(expectedCategoryCode);
 
      try {
        Assert.assertEquals(expectedCategoryCode, superCategory.getCategoryCode(), "Category code mismatch");

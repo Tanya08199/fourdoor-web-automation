@@ -6,7 +6,7 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="Fourdoor.GetPackage"/>
+            <class name="Fourdoor.SprintTask.PackageLevelServices"/>
         </classes>
 
     </test>
