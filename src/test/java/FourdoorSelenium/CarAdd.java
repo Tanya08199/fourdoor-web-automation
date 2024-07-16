@@ -21,7 +21,7 @@ public class CarAdd extends BaseTest{
         click(abc);
         Thread.sleep(5000);
         driver.findElement(By.xpath("//div[contains(@class,'relative')]/a[1]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         driver.findElement(By.xpath("//div[contains(@class,'flex lg:static bg-white w-full z-100 pt-2 pb-5 px-4 lg:p-0 left-0 fixed bottom-0 justify-between items-center mt-6 ')]/button")).click();
         Thread.sleep(5000);
     }

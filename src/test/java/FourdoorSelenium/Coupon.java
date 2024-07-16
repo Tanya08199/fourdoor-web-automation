@@ -31,16 +31,6 @@ public class  Coupon extends CarAdd{
         login couponlogin = new login();
         loginWithValiddNumber();
         System.out.println("Login Successfully");
-
-
-
-
-
-
-
-
     }
-
-
 
 }
