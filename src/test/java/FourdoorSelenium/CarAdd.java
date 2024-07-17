@@ -67,8 +67,6 @@ public class CarAdd extends BaseTest{
            Fuel.click();
           Thread.sleep(5000);
                   System.out.println("Car Manually Successfully added");
-
-
-    }
+ }
 
 }
