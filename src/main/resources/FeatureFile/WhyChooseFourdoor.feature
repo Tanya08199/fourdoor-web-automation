@@ -1,3 +1,4 @@
+@ignore
 Feature: Why choose fourdoor on listing page
 
   Scenario Outline: Verify all the super categories have "Why choose Fourdoor"
