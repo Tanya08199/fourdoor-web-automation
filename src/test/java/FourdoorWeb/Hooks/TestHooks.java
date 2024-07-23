@@ -2,6 +2,7 @@ package FourdoorWeb.Hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.openqa.selenium.WebDriver;
 import utils.WebDriverManger.WebDriverSetup;
 
 public class TestHooks {
@@ -9,8 +10,10 @@ public class TestHooks {
     @Before
     public void setUp()
     {
-        WebDriverSetup.getDriver().manage().window().maximize();
-        WebDriverSetup.getDriver().get("https://fourdoor-web-stage.fourdoor.dev/");
+        System.out.println("test hook setUp");
+        WebDriver driver = WebDriverSetup.getDriver();
+        driver.manage().window().maximize();
+        driver.get("https://fourdoor-web-stage.fourdoor.dev/");
     }
 
     @After
