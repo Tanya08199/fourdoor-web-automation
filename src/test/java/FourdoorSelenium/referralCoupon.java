@@ -1,5 +1,6 @@
 package FourdoorSelenium;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -17,7 +18,7 @@ public class referralCoupon extends BaseTest {
     public static void AppiledFromExisting() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().deleteAllCookies();
-        driver.get("https://fourdoor-web-stage.fourdoor.dev");
+        driver.get("https://fourdoor-web-qa.fourdoor.dev");
         WebElement CarIcon = fluentWait(By.xpath("//div[@class='ml-auto flex gap-6 justify-start items-center']/span[@class='cursor-pointer lg:hover:bg-bg-gray-300 rounded-xl']"), 30, 5);
         CarIcon.click();
         WebElement AddCar = driver.findElement(By.xpath("//div[contains(@class,'flex flex-col h-full w-full relative')]"));
@@ -36,25 +37,20 @@ public class referralCoupon extends BaseTest {
         Thread.sleep(3000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement ListofPackagegrid = fluentWait(By.xpath("//div[contains(@class,'max-w-screen-xl')]//div[contains(@class,'lg:shadow-landingCard')]/a"), 400, 10);
-//        WebElement ListofPackage1 = ListofPackagegrid.findElement(By.xpath("//div[contains(@class,'max-w-screen-xl')]//div[contains(@class,'lg:shadow-landingCard')]/a[7]"));
+//        WebElement ListofPackage1 = ListofPackagegrid.findElement(By.xpath("//div[contains(@class,'max-w-screen-xl')]//div[contains(@class,'lg:shadow-landingCard')]/a[4]"));
 //        ListofPackage1.click();
 
         for (int j = 1; j < 9; j++) {
             Map<String, Object> rowData = new HashMap<>(); // Create new rowData map for each iteration
             driver.findElement(By.xpath("//div[contains(@class,'max-w-screen-xl')]//div[contains(@class,'lg:shadow-landingCard')]/a["+j+"]")).click();
             Thread.sleep(4000);
-
-
-
-        List<String> ServicesnameList = new ArrayList<>();
+         List<String> ServicesnameList = new ArrayList<>();
         List<String> buttonsList = new ArrayList<>();
-
-
-
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             List<WebElement> buttons = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@class,'w-full text-center px-1.5 -mt-4 lg:-mt-7 relative')]/button")
-            ));
+            ));        
+
             List<WebElement> Servicesname = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@class,'flex flex-col justify-start items-start')]//a//p[contains(@class,'text-custom-gray-800 text-sm lg:text-base leading-5 font-semibold mb-0')]")
             ));
@@ -101,24 +97,33 @@ public class referralCoupon extends BaseTest {
                 break;
             }
         }
-            driver.navigate().to("https://fourdoor-web-stage.fourdoor.dev");
+            driver.navigate().to("https://fourdoor-web-qa.fourdoor.dev");
         System.out.println("Total number of services for this package: " + buttonsList.size());
 
         }
-  }
+ }
 
     @Test
     public static void testDisplayedCoupons() {
-        List<WebElement> displayedCoupons = driver.findElements(By.xpath("//div[contains(@class,'relative mt-6 w-full justify-center couponCard couponSlideCard')]//h5"));
-
-        if (displayedCoupons.isEmpty()) {
-            System.out.println("No coupons are displayed.");
-        } else {
-            System.out.println("Displayed coupons count: " + displayedCoupons.size());
-            System.out.println("All the Displayed coupons for this Service:");
-            for (WebElement coupon : displayedCoupons) {
-                System.out.println(coupon.getText());
-            }
-        }
-    }
-}
+        List<WebElement> displayedCoupons = driver.findElements(By.xpath("//div[contains(@class,'flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl ')]//div[contains(@class,'flex items-center justify-between')]//h5"));
+         List<WebElement> applybutton = driver.findElements(By.xpath("//button[contains(@class,'absolute right-[16px]  top-[20px]')]"));
+//     if (displayedCoupons.isEmpty()) {
+//            System.out.println("No coupons are displayed.");
+//        } else {
+//            System.out.println("Displayed coupons count: " + displayedCoupons.size());
+//            System.out.println("All the Displayed coupons for this Service:");
+//            for (WebElement coupon : displayedCoupons) {
+//                System.out.println(coupon.getText());
+//            }
+//        }
+     for (int i = 0; i < displayedCoupons.size(); i++) {
+                 String couponName = displayedCoupons.get(i).getText();
+                 boolean isActive = applybutton.get(i).isEnabled();
+                 String status = isActive ? "active" : "inactive";
+                 System.out.println("Coupon Name: " + couponName + " - Status: " + status);
+                 Assert.assertNotNull(couponName, "Coupon name should not be null");
+                 Assert.assertTrue("Coupon status should be either active or inactive", status.equals("active") || status.equals("inactive"));
+             }
+         }
+ }
+      
