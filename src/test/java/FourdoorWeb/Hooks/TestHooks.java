@@ -13,7 +13,7 @@ public class TestHooks {
         System.out.println("test hook setUp");
         WebDriver driver = WebDriverSetup.getDriver();
         driver.manage().window().maximize();
-        driver.get("https://fourdoor-web-stage.fourdoor.dev/");
+        driver.get("https://fourdoor-web-qa.fourdoor.dev/");
     }
 
     @After

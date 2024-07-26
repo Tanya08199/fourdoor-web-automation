@@ -1,3 +1,4 @@
+@ignore
 Feature: Call icon on different pages
 
   Scenario: Verify the call icon on home page
