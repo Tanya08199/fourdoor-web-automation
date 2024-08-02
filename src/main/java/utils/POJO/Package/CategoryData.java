@@ -1,0 +1,16 @@
+package utils.POJO.Package;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CategoryData {
+
+    private List<PackageResponse> packages;
+
+
+}

@@ -11,6 +11,9 @@ public class SuperCategory {
 
     private String categoryCode;
     private  String name;
+    private  String slug;
+    private String  cityCode;
+    private String searchRanking;
     private  MetaData metadata;
 
 

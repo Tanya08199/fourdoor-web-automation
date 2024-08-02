@@ -6,7 +6,8 @@
     </listeners>
     <test name="Test">
         <classes>
-            <class name="Fourdoor.GetSuperCategory"/>
+            <class name="Fourdoor.SprintTask.StandaloneApi"/>
         </classes>
+
     </test>
 </suite>

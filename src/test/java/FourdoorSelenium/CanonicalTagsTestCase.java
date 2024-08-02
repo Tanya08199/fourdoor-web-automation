@@ -12,8 +12,11 @@ public class CanonicalTagsTestCase extends BaseTest{
     @DataProvider(name = "urls")
     public Object[][] createUrl()
     {
+        String url = "stage";
         return new Object[][]{
+
                 {"https://fourdoor-web-stage.fourdoor.dev/"},
+<<<<<<< HEAD
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-ac-service/regular-ac-service?source="},
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance"},
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/general-car-inspection"},
@@ -23,6 +26,20 @@ public class CanonicalTagsTestCase extends BaseTest{
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source=Home%20page"},
                 {"https://fourdoor-web-qa.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source="},
                 {"https://fourdoor-web-qa.fourdoor.dev/help-and-faq?source=Home%20page"}
+=======
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/car-ac-service/regular-ac-service?source="},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/car-service-and-maintenance"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/general-car-inspection"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/bodyshop-dent-and-paint"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/steering-and-suspension"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/engine-and-brakes"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source=Home%20page"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/car-service-and-maintenance/essential-package?source="},
+                {"https://fourdoor-web-stage.fourdoor.dev/cart?orderId=SRSB3R&source=Listing%20page"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/bodyshop-dent-and-paint/front-bumper-paint?source="},
+                {"https://fourdoor-web-stage.fourdoor.dev/checkout/SRSB3R"},
+                {"https://fourdoor-web-stage.fourdoor.dev/gurugram/car-ac-service/radiator-flush-and-cleaning?source=Home%20page"}
+>>>>>>> anshuman-super-api
         };
     }
 

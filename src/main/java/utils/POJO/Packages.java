@@ -11,5 +11,6 @@ public class Packages {
     private String name;
     private String categoryCode;
     private MetaData metadata;
+    private String searchRanking;
 
 }

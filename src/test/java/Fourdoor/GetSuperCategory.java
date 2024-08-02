@@ -1,21 +1,18 @@
 package Fourdoor;
 
-import io.restassured.RestAssured;
+
 import io.restassured.response.Response;
 import jsonUtils.jsonUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.ExcelUtils;
 import utils.POJO.*;
 import utils.RestUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -62,23 +59,110 @@ public class GetSuperCategory {
     System.out.println("The response time for getSuperCategoryDetails is "+ responseTime + " ms");
 
     GetSuperCategoryResponse getSuperCategoryResponse = response.as(GetSuperCategoryResponse.class);
+
+    //Create a map to store super category data based on unique identifiers
+    Map<String,SuperCategory> superCategoryMap = new HashMap<>();
     for(SuperCategory superCategory : getSuperCategoryResponse.getData())
     {
-      String categoryCode = superCategory.getCategoryCode();
-      System.out.println("The super category code is "+categoryCode);
-      String categoryName = superCategory.getName();
-      System.out.println("The super category name is "+categoryName);
+      superCategoryMap.put(superCategory.getCategoryCode(),superCategory);
+    }
 
-      MetaData metadata = superCategory.getMetadata();
-      if(metadata != null)
-      {
-        String h1 = metadata.getH1();
-        System.out.println("The h1 is "+h1);
-        String title = metadata.getTitle();
-        System.out.println("The title is "+title);
-        String desc = metadata.getDescription();
-        System.out.println("The description is "+desc);
-      }
+    XSSFSheet sheet = ExcelUtils.readExcel("data/TestExcel (1).xlsx","Sheet1");
+
+
+
+   for(int i =1 ; i<= sheet.getLastRowNum(); i++)
+   {
+
+     String expectedCategoryCode = ExcelUtils.getCellValue(sheet,i,0);
+     String expectedCategoryName = ExcelUtils.getCellValue(sheet,i,2);
+     String expectedSlug = ExcelUtils.getCellValue(sheet,i,1);
+     String expectedCityCode = ExcelUtils.getCellValue(sheet,i,5);
+     String expectedSearchRanking = ExcelUtils.getCellValue(sheet,i,6);
+
+     SuperCategory superCategory = superCategoryMap.get(expectedCategoryCode);
+
+     try {
+       Assert.assertEquals(expectedCategoryCode, superCategory.getCategoryCode(), "Category code mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Category code mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedCategoryName, superCategory.getName(), "Category name mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Category name mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedSlug, superCategory.getSlug(), "Slug mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Slug mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedCityCode, superCategory.getCityCode(), "City code mismatch");
+     } catch (AssertionError e) {
+       System.err.println("City code mismatch at row " + i + ": " + e.getMessage());
+     }
+
+     try {
+       Assert.assertEquals(expectedSearchRanking, superCategory.getSearchRanking(), "Search rank mismatch");
+     } catch (AssertionError e) {
+       System.err.println("Search rank mismatch at row " + i + ": " + e.getMessage());
+     }
+
+
+
+       MetaData metadata = superCategory.getMetadata();
+       if (metadata != null) {
+
+         try {
+           String expectedH1 = ExcelUtils.getCellValue(sheet, i, 9);
+           Assert.assertEquals(expectedH1, metadata.getH1(), "H1 mismatch");
+         } catch (AssertionError e) {
+           System.err.println("H1 mismatch at row " + i + ": " + e.getMessage());
+         }
+
+         try {
+           String expectedTitle = ExcelUtils.getCellValue(sheet, i, 7);
+           Assert.assertEquals(expectedTitle, metadata.getTitle(), "Title mismatch");
+         } catch (AssertionError e) {
+           System.err.println("Title mismatch at row " + i + ": " + e.getMessage());
+         }
+
+         try {
+           String expectedDesc = ExcelUtils.getCellValue(sheet, i, 8);
+           Assert.assertEquals(expectedDesc, metadata.getDescription(), "Description mismatch");
+         } catch (AssertionError e) {
+           System.err.println("Description mismatch at row " + i + ": " + e.getMessage());
+         }
+
+
+         Icon icon = metadata.getIcon();
+         HeroImage heroImage = metadata.getHeroImage();
+
+
+         if (icon != null) {
+           try {
+             String expectedPathIcon = ExcelUtils.getCellValue(sheet, i, 3);
+             Assert.assertEquals(expectedPathIcon, icon.getPath(), "Icon path mismatch");
+           } catch (AssertionError e) {
+             System.err.println("Icon path mismatch at row " + i + ": " + e.getMessage());
+           }
+
+         }
+         if (heroImage != null) {
+           try {
+             String expectedHeroPath = ExcelUtils.getCellValue(sheet, i, 4);
+             Assert.assertEquals(expectedHeroPath, heroImage.getPath(), "Hero image path mismatch");
+           } catch (AssertionError e) {
+             System.err.println("Hero image path mismatch at row " + i + ": " + e.getMessage());
+           }
+         }
+       }
+     }
+
     }
 
 /*
@@ -105,8 +189,9 @@ public class GetSuperCategory {
     }
 
  */
-  }
 
+
+  /*
   @DataProvider(name = "slugs")
   public Object[][] createSlugs() throws IOException {
     List<String> slugs = jsonUtils.getSlugs("/Fourdoor/QA/CategoryName.json");
@@ -154,7 +239,7 @@ public class GetSuperCategory {
       System.out.println("Category name is :-"+ name);
 
     }
-    */
+
 
   }
 
@@ -208,8 +293,9 @@ public class GetSuperCategory {
         System.out.println("Package description is :- "+desc);
 
       }
-    }*/
-  }
+    }
+
+  }*/
 
 
 }

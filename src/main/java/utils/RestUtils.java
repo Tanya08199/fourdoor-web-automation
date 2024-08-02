@@ -45,6 +45,7 @@ public class RestUtils {
 
     }
 
+
     public static Response performGetWithParams(String endPoint, Map<String, String> headers, Map<String,String> pathParams)
     {
         RequestSpecification requestSpecification = getRequestSpecification(endPoint,headers).pathParams(pathParams);
