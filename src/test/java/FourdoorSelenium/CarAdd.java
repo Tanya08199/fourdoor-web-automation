@@ -8,17 +8,86 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import utils.Constant;
+import utils.XPaths;
+
+
+import static utils.WebDriverManger.WebDriverUtils.click;
 
 public class CarAdd extends BaseTest{
-            static String CarNo = "HR26EP4780";
+/*
+add car without login()
+jshvbjhvjj
+nvdmnfbmv
+
+add car with login()
+hbdjhfgsrjyfg
+hbhfbhfvf
+
+
+1. add car via hamburger()
+2. add car via homepage()
+3. add car via listing()
+4. add car via pdp()
+
+
+public class add car
+
+public class test add_car_without_login.add car via hamburger(test case 1 ){
+bdcjhsgjvg
+anvchga
+}
+public classadd_car_without_login.add car via add car via homepage(test case 2 ){
+
+ ncbsvdnvfhrw
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test(priority = 1)
     public static void AddCarWithoutLogin() throws InterruptedException {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://fourdoor-web-stage.fourdoor.dev");
-        WebElement abc = driver.findElement(By.xpath("//div[contains(@class,'max-w-screen-xl')]//div[contains(@class,'lg:shadow-landingCard')]/a[2]"));
-        click(abc);
+//        WebElement abc = driver.findElement(By.xpath(XPaths.xyz));
+
+//        click(abc);
         Thread.sleep(5000);
         driver.findElement(By.xpath("//div[contains(@class,'relative')]/a[1]")).click();
         Thread.sleep(7000);
@@ -27,13 +96,13 @@ public class CarAdd extends BaseTest{
     }
     @Test (priority = 2)
         public static void AddCarWithCarNumber() throws InterruptedException {
-        String carNumber = CarNo; // or you can pass a specific value if needed
+        String carNumber = Constant.CarNo; // or you can pass a specific value if needed
         AddCarWithCarNumber(carNumber);
     }
 
         public static void AddCarWithCarNumber(String carNumber) throws InterruptedException {
         if(carNumber == null) {
-            carNumber = CarNo;
+            carNumber = Constant.CarNo;
         }
         AddCarWithoutLogin();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

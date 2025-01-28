@@ -15,9 +15,19 @@ import java.util.List;
 public class login extends BaseTest {
 
     @Test
-    public static void vaildlogin() throws InterruptedException {
+    public static void Vaildlogin() throws InterruptedException {
         driver.get("https://fourdoor-web-stage.fourdoor.dev");
-        Thread.sleep(5000);
+
+
+
+
+
+
+
+
+
+
+
 
         WebElement menu = driver.findElement(By.xpath("(//div[@class='ml-auto flex gap-6 justify-start items-center']//div[@class='relative flex items-center z-40'])[1]"));
         menu.click();

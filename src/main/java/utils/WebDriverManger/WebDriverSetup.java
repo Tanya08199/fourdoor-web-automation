@@ -3,23 +3,23 @@ package utils.WebDriverManger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.SessionNotCreatedException;
 
 public class WebDriverSetup {
 
     public static WebDriver driver;
 
-    public static WebDriver getDriver()
-    {
+    public static WebDriver getDriver() {
 
-        if (driver==null)
-        {
-
-            WebDriverManager.chromedriver().driverVersion("126.0.0").setup();
-            System.setProperty("webdriver.chrome.driver", "/Users/user/IdeaProjects/fourdoor-web-automation/src/main/java/utils/WebDriverManger/ChromeDriver/chromedriver-mac-x64/chromedriver");
-            driver= new ChromeDriver();
-
+        if (driver == null) {
+            try {
+                // WebDriverManager will automatically download and set the path for the chromedriver
+                WebDriverManager.chromedriver().driverVersion("131.0.6778.264").setup();
+                driver = new ChromeDriver(); // No need to set system property manually
+            } catch (Exception e) {
+                throw new SessionNotCreatedException("Could not create a new WebDriver session: " + e.getMessage(), e);
+            }
         }
-
         return driver;
     }
 

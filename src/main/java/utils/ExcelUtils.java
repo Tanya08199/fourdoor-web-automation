@@ -10,6 +10,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 
+import static java.sql.Types.BOOLEAN;
+import static java.sql.Types.NUMERIC;
+import static org.apache.poi.ss.usermodel.DataValidationConstraint.ValidationType.FORMULA;
+import static org.codehaus.groovy.syntax.Types.STRING;
+
 
 public class ExcelUtils {
 

@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.*;
 
 import static FourdoorSelenium.Coupon.ApplyCoupon;
+import static utils.WebDriverManger.WebDriverUtils.waitForInvisible;
 
 public class referralCoupon extends BaseTest {
 
