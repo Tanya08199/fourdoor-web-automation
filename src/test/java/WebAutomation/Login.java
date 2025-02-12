@@ -7,6 +7,27 @@ import java.util.Arrays;
 
 public class Login {
     public static void main(String[] args) {
+        String [] name ={"abide","def","limn","opqr"};
+        for (int i = name.length-1; i>=0 ; i--){
+            System.out.print(" " + name[i]);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // addtion of two martix
      /*   int[][] Marks1 = {{9,3,4},
                 {8,4,9}};
@@ -23,10 +44,12 @@ public class Login {
 
         }*/
 
-        String [] marks ={"abcd","cdef"};
-        for (int i = marks.length-1 ; i >= 0 ; i-- ){
-            System.out.print(" " + marks[i]);
-        }
+//        String [] marks ={"abcd","cdef"};
+//        for (int i = marks.length-1 ; i >= 0 ; i-- ){
+//            System.out.print(" " + marks[i]);
+//        }
+
+
 
 
 

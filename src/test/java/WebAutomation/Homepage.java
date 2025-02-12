@@ -1,11 +1,13 @@
 package WebAutomation;
 
 import com.microsoft.playwright.*;
+import org.junit.Test;
 
 import java.nio.file.Paths;
 
 public class Homepage {
-    public static void main(String[] args) {
+    @Test
+    public void login(){
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
             BrowserContext context = browser.newContext();
