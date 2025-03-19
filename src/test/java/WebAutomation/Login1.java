@@ -4,24 +4,28 @@ import org.junit.Test;
 
 public class Login1 {
 
-    @Test
-    public void Homepage(){
-    }
+/*  To find ODD and even
 
-    @Test
+  public static void main (String[] args){
+      int num = 0;
+      if(num % 2 == 0){
+System.out.println("Number is even"+ num);
+      }
+      else{
+          System.out.println("Number is odd " +num);
+      }
+  } */
 
-    public void FooterLink(){}
+   //  To find prime number
+     public static void main(String[] arg){
 
-    @Test
-    public void UsefulLink(){}
+         }
 
-    @Test
-    public void Listing(){}
 
-    @Test
-    public void Pdp(){}
+     }
 
-}
+
+
 
 
 
