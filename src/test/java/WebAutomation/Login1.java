@@ -2,6 +2,7 @@ package WebAutomation;
 
 import org.junit.Test;
 
+
 public class Login1 {
 
 /*  To find ODD and even
@@ -152,14 +153,15 @@ System.out.println("Number is even"+ num);
 
     // reverse the String
 
-    public static void main(String args[]){
-        String org = "abcdef";
-        String rev ="";
-        for(int i = org.length()-1; i>=0 ; ){
-
-        }
-
-    }
+//    public static void main(String args[]){
+//        String org = "abcdef";
+//        String rev ="";
+//        for(int i = org.length()-1; i>=0 ; i--){
+//rev= rev + org.charAt(i);
+//        }
+//
+//        System.out.println(rev);
+//    }
 
 
 

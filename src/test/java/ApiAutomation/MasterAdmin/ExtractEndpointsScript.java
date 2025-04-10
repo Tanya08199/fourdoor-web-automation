@@ -7,7 +7,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ExtractEndpointsScript {
+public class
+ExtractEndpointsScript {
     public static void main(String[] args) {
         String filePath = "/Users/a35549/Downloads/fourdoor-catalog-service.postman_collection.json"; // Update with your actual file path
         List<String> endpoints = extractEndpoints(filePath);
